@@ -1,4 +1,4 @@
-module marketool
+module github.com/chenhu1001/marketool
 
 go 1.17
 
