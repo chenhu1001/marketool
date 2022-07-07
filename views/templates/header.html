@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+
+<head>
+    <!--Use the title variable to set the title of the page-->
+    <title>{{ .title }}</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta charset="UTF-8">
+
+    <!-- Using tailwind fo styling -->
+    <link href="/static/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-green-100">
+<!--Embed the navitation.html template at this location-->
+{{ template "navigation.html" . }}
+<div class="content min-h-screen">
