@@ -30,6 +30,20 @@ func ShowIndexPage(c *gin.Context) {
 		"index.html")
 }
 
+func GetHomeHouse(c *gin.Context) {
+	houseRepository := repository.HouseRepository{}
+
+	house := houseRepository.FetchById(1)
+
+	if house == nil {
+		return
+	}
+
+	internal.Render(c, gin.H{
+		"title":   house.Title,
+		"payload": house}, "house.html")
+}
+
 func GetHouse(c *gin.Context) {
 	houseRepository := repository.HouseRepository{}
 

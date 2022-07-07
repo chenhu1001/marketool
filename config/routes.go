@@ -20,5 +20,6 @@ func SetupRoutes() {
 	})
 
 	internal.Router.GET("/", handlers.ShowIndexPage)
+	internal.Router.GET("/houses", handlers.GetHomeHouse)
 	internal.Router.GET("/houses/:house_id", handlers.GetHouse)
 }
