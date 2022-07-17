@@ -1,4 +1,4 @@
-[#](#) goutils
+# goutils
 
 [![Build Status](https://travis-ci.org/axiaoxin-com/goutils.svg?branch=master)](https://travis-ci.org/axiaoxin-com/goutils)
 [![Go Report Card](https://goreportcard.com/badge/github.com/axiaoxin-com/goutils)](https://goreportcard.com/report/github.com/axiaoxin-com/goutils)
@@ -10,6 +10,11 @@ Golang 通用类函数工具包
 
 ## 功能概览
 
+### 数据库相关
+
+- [根据配置信息生成不同数据库的 DSN 字符串](./dbconfig.go)
+- [gorm 常用操作封装（包括但不限于：创建各类 db 实例，根据 viper 配置直接获取各类 db 实例）](./gormdb.go)
+- [sqlx 常用操作封装（包括但不限于：创建各类 db 实例，根据 viper 配置直接获取各类 db 实例）](./sqlxdb.go)
 
 ### Redis 相关
 
@@ -90,5 +95,3 @@ Golang 通用类函数工具包
 - [分页计算](./pagination.go)
 - [validator 参数验证错误信息自定义](./validator.go)
 - [封装 go-cache 的 Get 方法支持直接获取具体类型: GetGoCache](./gocache.go)
-- [验证邮箱地址是否合法](./email.go)
-- [密码加密、校验](./password.go)

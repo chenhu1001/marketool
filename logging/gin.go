@@ -63,8 +63,8 @@ func GetGinTraceIDFromPostForm(c *gin.Context) string {
 
 // GinLogDetails gin 日志中间件记录的信息
 type GinLogDetails struct {
-	// 接收到请求的时间
-	ReqTime time.Time `json:"req_time"`
+	// 请求处理完成时间
+	Timestamp time.Time `json:"timestamp"`
 	// 请求方法
 	Method string `json:"method"`
 	// 请求 Path
@@ -96,7 +96,7 @@ type GinLogDetails struct {
 	// 响应 body 字节数
 	BodySize int `json:"body_size"`
 	// 请求处理耗时 (秒)
-	Latency float64 `json:"latency_seconds"`
+	Latency float64 `json:"latency"`
 	// Context 中的 Keys
 	ContextKeys map[string]interface{} `json:"context_keys,omitempty"`
 	// http request header
@@ -228,8 +228,6 @@ func GinLoggerWithConfig(conf GinLoggerConfig) gin.HandlerFunc {
 	}
 
 	return func(c *gin.Context) {
-		start := time.Now()
-
 		traceID := getTraceID(c)
 		// 设置 trace id 到 request header 中
 		c.Request.Header.Set(string(TraceIDKeyname), traceID)
@@ -244,9 +242,10 @@ func GinLoggerWithConfig(conf GinLoggerConfig) gin.HandlerFunc {
 		}
 		_, ctxLogger := NewCtxLogger(c, ginLogger, traceID)
 
+		start := time.Now()
+
 		// 获取请求信息
 		details := GinLogDetails{
-			ReqTime:       start,
 			Method:        c.Request.Method,
 			Path:          c.Request.URL.Path,
 			Query:         c.Request.URL.RawQuery,
@@ -288,17 +287,17 @@ func GinLoggerWithConfig(conf GinLoggerConfig) gin.HandlerFunc {
 			// 获取响应信息
 			details.StatusCode = c.Writer.Status()
 			details.BodySize = c.Writer.Size()
-			details.Latency = time.Since(start).Seconds()
+			details.Timestamp = time.Now()
+			details.Latency = details.Timestamp.Sub(start).Seconds()
 
 			// 创建 logger
 			accessLogger := ctxLogger.Named("access_logger").With(
-				zap.Time("req_time", details.ReqTime),
 				zap.String("client_ip", details.ClientIP),
 				zap.String("method", details.Method),
 				zap.String("path", details.Path),
 				zap.String("host", details.Host),
 				zap.Int("status_code", details.StatusCode),
-				zap.Float64("latency_seconds", details.Latency),
+				zap.Float64("latency", details.Latency),
 			)
 			// handler 中使用 c.Error(err) 后，会打印到 context_errors 字段中
 			if len(c.Errors) > 0 {
@@ -351,7 +350,7 @@ func GinLoggerWithConfig(conf GinLoggerConfig) gin.HandlerFunc {
 
 			// 打印访问日志，根据状态码确定日志打印级别
 			log := logger.Info
-			if details.StatusCode >= http.StatusInternalServerError || len(c.Errors) > 0 {
+			if details.StatusCode >= http.StatusInternalServerError {
 				// 500+ 始终打印带 details 的 error 级别日志
 				errLogger := detailsLogger.Named("err")
 				// 无视配置开关，打印全部能搜集的信息
@@ -372,8 +371,13 @@ func GinLoggerWithConfig(conf GinLoggerConfig) gin.HandlerFunc {
 				}
 				log = errLogger.Error
 			} else if details.StatusCode >= http.StatusBadRequest {
-				// 400+ 默认使用 warn 级别
+				// 400+ 默认使用 warn 级别。如果有 errors 则使用 error 级别
 				log = logger.Warn
+				if len(c.Errors) > 0 {
+					log = logger.Error
+				}
+			} else if len(c.Errors) > 0 {
+				log = logger.Error
 			}
 
 			skipLog := false
