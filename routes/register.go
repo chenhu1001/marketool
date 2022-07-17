@@ -14,7 +14,11 @@
 package routes
 
 import (
+	"github.com/chenhu1001/marketool/webserver"
+	"github.com/gin-contrib/pprof"
 	"github.com/prometheus/common/version"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"net/http"
 
 	"github.com/chenhu1001/marketool/logging"
@@ -48,17 +52,17 @@ func Register(httpHandler http.Handler) {
 	docs.SwaggerInfo.Schemes = viper.GetStringSlice("apidocs.schemes")
 
 	// Group x 默认 url 路由
-	//x := app.Group("/x", webserver.GinBasicAuth())
-	//{
-	//	if viper.GetBool("server.pprof") {
-	//		pprof.RouteRegister(x, "/pprof")
-	//	}
-	//	if viper.GetBool("server.metrics") {
-	//		x.GET("/metrics", webserver.PromExporterHandler())
-	//	}
-	//	// ginSwagger 生成的在线 API 文档路由
-	//	x.GET("/apidocs/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, DisableGinSwaggerEnvkey))
-	//}
+	x := app.Group("/x", webserver.GinBasicAuth())
+	{
+		if viper.GetBool("server.pprof") {
+			pprof.RouteRegister(x, "/pprof")
+		}
+		if viper.GetBool("server.metrics") {
+			x.GET("/metrics", webserver.PromExporterHandler())
+		}
+		// ginSwagger 生成的在线 API 文档路由
+		x.GET("/apidocs/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, DisableGinSwaggerEnvkey))
+	}
 
 	// 注册 favicon.ico 和 robots.txt
 	app.GET("/favicon.ico", func(c *gin.Context) {

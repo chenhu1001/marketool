@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/chenhu1001/marketool/goutils"
 	"github.com/chenhu1001/marketool/logging"
 	"github.com/chenhu1001/marketool/routes"
@@ -16,20 +15,16 @@ import (
 )
 
 func main() {
-	ip, err := goutils.GetLocalIP()
-	if err != nil {
-		fmt.Println("error")
-	} else {
-		fmt.Println(ip)
-	}
-
+	// 初始化配置文件
 	InitWithConfigFile("./config.toml")
 
 	// 创建 gin app
 	middlewares := DefaultGinMiddlewares()
 	server := webserver.NewGinEngine(middlewares...)
+
 	// 注册路由
 	routes.Register(server)
+
 	// 运行服务
 	webserver.Run(server)
 }
@@ -76,6 +71,8 @@ func InitWithConfigFile(configFile string) {
 
 	viper.SetDefault("basic_auth.username", "admin")
 	viper.SetDefault("basic_auth.password", "admin")
+
+	viper.SetDefault("app.chan_size", 50)
 
 	// 初始化 sentry 并创建 sentry 客户端
 	sentryDSN := viper.GetString("sentry.dsn")

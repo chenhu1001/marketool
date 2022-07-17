@@ -1,0 +1,101 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="股票,基本面,技术面,东方财富,选股,基金,4433" name="keywords"/>
+    <meta content="InvesTool, 财报分析，股票检测，基本面选股，基金检测，基金筛选，4433法则，飙股在线等" name="description"/>
+    <meta content="axiaoxin" name="author"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1.0, maximum-scale=1, shrink-to-fit=no"
+          name="viewport"/>
+
+    <link href="/statics/favicon.ico" rel="shortcut icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/statics/css/materialize.min.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+    <link href="/statics/css/app.css" rel="stylesheet"/>
+    <title>{{ .PageTitle }} - InvesTool, 财报分析，股票检测，基本面选股，基金检测，基金筛选，4433法则，飙股在线等</title>
+</head>
+
+<body>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a class="brand-logo" href="/"><i class="material-icons">local_atm</i>InvesTool</a>
+            <a class="sidenav-trigger" data-target="mobile-sidenav" href="#"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li id="nav-stock"><a href="/"><i class="material-icons left">trending_up</i>股票</a></li>
+                <li id="nav-fund"><a href="/fund"><i class="material-icons left">timeline</i>基金</a></li>
+                <li id="nav-about"><a href="/about"><i class="material-icons left">info_outline</i>关于</a></li>
+                <li id="nav-comment"><a href="/comment"><i class="material-icons left">chat_bubble_outline</i>留言</a>
+                </li>
+                <li id="nav-materials"><a href="/materials"><i class="material-icons left">book</i>资料</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="/statics/img/sidenav_bg.png">
+                </div>
+                <a href="#!"><img class="circle" src="/statics/img/sidenav_icon.png"></a>
+                <a href="#!"><span class="white-text">InvesTool v{{ .Version }}</span></a>
+            </div>
+        </li>
+        <li><a class="collapsible-header waves-effect waves-red" href="/"><i class="material-icons left">trending_up</i>股票</a>
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="collapsible-header waves-effect waves-red" href="/fund"><i
+                class="material-icons left">timeline</i>基金</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="collapsible-header waves-effect waves-red" href="/about"><i class="material-icons left">info_outline</i>关于</a>
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="collapsible-header waves-effect waves-red" href="/comment"><i class="material-icons left">chat_bubble_outline</i>留言</a>
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="collapsible-header waves-effect waves-red" href="/materials"><i
+                class="material-icons left">book</i>资料</a></li>
+    </ul>
+
+    <div class="fixed-action-btn" id="fixed-action-btn" style="bottom: 74px; right: 24px;">
+        <a class="btn btn-floating btn-large red lighten-2" id="tap-target-btn">
+            <i class="large material-icons">bookmark_border</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red tooltipped pulse" data-position="left" data-tooltip="股票" href="/"><i
+                    class="material-icons">trending_up</i></a></li>
+            <li><a class="btn-floating orange tooltipped pulse" data-position="left" data-tooltip="基金" href="/fund"><i
+                    class="material-icons">timeline</i></a></li>
+            <li><a class="btn-floating blue tooltipped pulse" data-position="left" data-tooltip="关于" href="/about"><i
+                    class="material-icons">info_outline</i></a></li>
+            <li><a class="btn-floating purple tooltipped pulse" data-position="left" data-tooltip="留言"
+                   href="/comment"><i class="material-icons">chat_bubble_outline</i></a></li>
+            <li><a class="btn-floating brown tooltipped pulse" data-position="left" data-tooltip="资料" href="/materials"><i
+                    class="material-icons">book</i></a></li>
+            <li><a class="btn-floating green tooltipped pulse" data-position="left" data-tooltip="返回顶部" id="to-top"><i
+                    class="material-icons">publish</i></a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="container">
+    {{ if .Error }}
+    <div class="row">
+        <div class="chip flow-text orange lighten-1 col s12 center-align">
+            {{ .Error }}
+            <i class="close material-icons">close</i>
+        </div>
+    </div>
+    {{ end }}
+{{ end }}
