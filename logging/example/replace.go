@@ -31,7 +31,7 @@ func main() {
 	// 全局方法将使用新的 logger，上报 sentry 并输出到文件
 	logging.Error(nil, "ReplaceLogger")
 	// Output并保存到文件:
-	// {"level":"ERROR","time":"2020-04-15 20:09:23.661927","logger":"replacedLogger.ctx_logger","caller":"logging/global.go:Error:166","msg":"ReplaceLogger","pid":73847,"stacktrace":"github.com/axiaoxin-com/logging.Error\n\t/Users/ashin/go/src/logging/global.go:166\nmain.main\n\t/Users/ashin/go/src/logging/example/replace.go:30\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:203"}
+	// {"level":"ERROR","time":"2020-04-15 20:09:23.661927","logger":"replacedLogger.ctx_logger","caller":"logging/global.go:Error:166","msg":"ReplaceLogger","pid":73847,"stacktrace":"github.com/chenhu1001/marketool/logging.Error\n\t/Users/ashin/go/src/logging/global.go:166\nmain.main\n\t/Users/ashin/go/src/logging/example/replace.go:30\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:203"}
 
 	// 重置默认 logger
 	resetLogger()

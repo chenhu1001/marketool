@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/chenhu1001/marketool/cron"
 	"github.com/chenhu1001/marketool/goutils"
 	"github.com/chenhu1001/marketool/logging"
 	"github.com/chenhu1001/marketool/routes"
@@ -21,6 +22,11 @@ func main() {
 	// 创建 gin app
 	middlewares := DefaultGinMiddlewares()
 	server := webserver.NewGinEngine(middlewares...)
+
+	// 启动定时任务
+	if viper.GetString("env") == "prod" {
+		cron.RunCronJobs(true)
+	}
 
 	// 注册路由
 	routes.Register(server)

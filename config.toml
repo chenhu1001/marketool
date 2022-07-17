@@ -9,7 +9,7 @@
 ########## 部署环境标志
 # 该值关联影响其他配置，如数据库， redis 等涉及不同环境的配置
 # 如 配置为 localhost ， 使用 goutils 获取 mysql 相关实例时将使用 [mysql.localhost] 的配置
-env = "localhost"
+env = "prod"
 
 
 ########## 业务相关配置
