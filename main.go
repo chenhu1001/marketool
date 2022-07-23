@@ -1,8 +1,10 @@
 package main
 
 import (
+	"github.com/chenhu1001/marketool/cron"
 	"github.com/chenhu1001/marketool/goutils"
 	"github.com/chenhu1001/marketool/logging"
+	"github.com/chenhu1001/marketool/routes"
 	"github.com/chenhu1001/marketool/routes/response"
 	"github.com/chenhu1001/marketool/webserver"
 	"github.com/fsnotify/fsnotify"
@@ -45,6 +47,14 @@ func main() {
 	//	}
 	//}
 
+	// 启动定时任务
+	if viper.GetString("env") == "prod" {
+		cron.RunCronJobs(true)
+	}
+
+	// 注册路由
+	routes.Register(server)
+
 	// 运行服务
 	webserver.Run(server)
 }
@@ -83,8 +93,8 @@ func InitWithConfigFile(configFile string) {
 	viper.SetDefault("server.mode", gin.ReleaseMode)
 	viper.SetDefault("server.pprof", true)
 
-	viper.SetDefault("apidocs.title", "investool swagger apidocs")
-	viper.SetDefault("apidocs.desc", "Using investool to develop gin app on fly.")
+	viper.SetDefault("apidocs.title", "marketool swagger apidocs")
+	viper.SetDefault("apidocs.desc", "Using marketool to develop gin app on fly.")
 	viper.SetDefault("apidocs.host", "localhost:4869")
 	viper.SetDefault("apidocs.basepath", "/")
 	viper.SetDefault("apidocs.schemes", []string{"http"})
