@@ -10,6 +10,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	"github.com/unrolled/secure"
 	"os"
 	"path"
 	"strings"
@@ -23,30 +24,6 @@ func main() {
 	middlewares := DefaultGinMiddlewares()
 	server := webserver.NewGinEngine(middlewares...)
 
-	//// 启动定时任务
-	//if viper.GetString("env") == "prod" {
-	//	// 需要执行的命令： free -mh
-	//	cmd := exec.Command("/bin/bash", "-c", `rm -rf /root/soft/investool/eastmoney_funds_list.json /root/soft/investool/fund_4433_list.json /root/soft/investool/fund_all_list.json /root/soft/investool/fund_managers.json /root/soft/investool/fund_type_list.json /root/soft/investool/industry_list.json && cp /root/temp/eastmoney_funds_list.json /root/temp/fund_4433_list.json /root/temp/fund_all_list.json /root/temp/fund_managers.json /root/temp/fund_type_list.json /root/temp/industry_list.json /root/soft/investool/`)
-	//
-	//	// 获取管道输入
-	//	_, err := cmd.StdoutPipe()
-	//	if err != nil {
-	//		fmt.Println("无法获取命令的标准输出管道", err.Error())
-	//		return
-	//	}
-	//
-	//	// 执行Linux命令
-	//	if err := cmd.Start(); err != nil {
-	//		fmt.Println("Linux命令执行失败，请检查命令输入是否有误", err.Error())
-	//		return
-	//	}
-	//
-	//	_, err1 := http.Get("https://api.day.app/Y3uKSZF6URZQTU7FXuTUUM/爬取成功")
-	//	if err1 != nil {
-	//		log.Println("err")
-	//	}
-	//}
-
 	// 启动定时任务
 	if viper.GetString("env") == "prod" {
 		cron.RunCronJobs(true)
@@ -55,8 +32,30 @@ func main() {
 	// 注册路由
 	routes.Register(server)
 
-	// 运行服务
-	webserver.Run(server)
+	if viper.GetString("server.protocol") == "https" {
+		server.Use(TlsHandler())
+		server.RunTLS(viper.GetString("server.addr"), "marketool.top_bundle.pem", "marketool.top.key")
+	} else {
+		// 运行服务
+		webserver.Run(server)
+	}
+}
+
+func TlsHandler() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		secureMiddleware := secure.New(secure.Options{
+			SSLRedirect: true,
+			SSLHost:     "www.marketool.top",
+		})
+		err := secureMiddleware.Process(c.Writer, c.Request)
+
+		// If there was an error, do not continue.
+		if err != nil {
+			return
+		}
+
+		c.Next()
+	}
 }
 
 func init() {

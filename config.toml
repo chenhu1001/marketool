@@ -26,14 +26,19 @@ env = "prod"
 ########## server 相关配置
 [server]
     # server 运行地址，支持 HTTP 端口 ":port" 或 UNIX Socket "unix:/file"
-    addr = ":80"
+    addr = ":443"
     # gin mode ，可选值： debug 、 test 、 release
     mode = "debug"
     # 开启 pprof
     pprof = true
     # 开启 prometheus metrics
     metrics = true
-
+    # 请求协议：http、https
+    protocol = "https"
+    # certFile
+    certFile = "marketool.top_bundle.pem"
+    # keyFile
+    keyFile = "marketool.top.key"
 
 
 ########## 静态文件相关配置

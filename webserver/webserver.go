@@ -154,29 +154,6 @@ func Run(app http.Handler) {
 		if err := srv.Serve(ln); err != nil {
 			logging.Fatal(nil, err.Error())
 		}
-
-		//// 支持https
-		//var ln net.Listener
-		//var err error
-		//if strings.ToLower(strings.Split(addr, ":")[0]) == "unix" {
-		//	ln, err = net.Listen("unix", strings.Split(addr, ":")[1])
-		//	if err != nil {
-		//		panic(err)
-		//	}
-		//} else {
-		//	ln, err = net.Listen("tcp", addr)
-		//	if err != nil {
-		//		panic(err)
-		//	}
-		//}
-		//
-		//if err := srv.Serve(ln); err != nil {
-		//	logging.Fatal(nil, err.Error())
-		//}
-		//
-		//if err := srv.ListenAndServeTLS("./marketool.top_bundle.pem", "./marketool.top.key"); err != nil && err != http.ErrServerClosed {
-		//	logging.Fatal(nil, err.Error())
-		//}
 	}()
 	logging.Infof(nil, "Server is running on %s", srv.Addr)
 
