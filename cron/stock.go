@@ -14,9 +14,9 @@ import (
 
 // SyncIndustryList 同步行业列表
 func SyncIndustryList() {
-	if !goutils.IsTradingDay() {
-		return
-	}
+	//if !goutils.IsTradingDay() {
+	//	return
+	//}
 	ctx := context.Background()
 	indlist, err := datacenter.EastMoney.QueryIndustryList(ctx)
 	if err != nil {
@@ -40,4 +40,7 @@ func SyncIndustryList() {
 		promSyncError.WithLabelValues("SyncIndustryList").Inc()
 		return
 	}
+
+	// 推送爬取结果
+	goutils.Push("SyncIndustryList成功")
 }

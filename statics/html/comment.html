@@ -1,4 +1,5 @@
 {{ template "header" . }}
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
 <div class="row">
     <h4 class="center">留言评论</h4>
     <div class="divider"></div>
@@ -7,30 +8,20 @@
     </div>
 
     <div class="section">
-        <div id="SOHUCS" ></div>
-        <script type="text/javascript">
-        (function(){
-            var appid = 'cywbKB4y6';
-            var conf = 'prod_64bbbab59acf149c401cbe0d192288f7';
-            var width = window.innerWidth || document.documentElement.clientWidth;
-            if (width < 1000) {
-                var head = document.getElementsByTagName('head')[0]||document.head||document.documentElement;
-                var script = document.createElement('script');
-                script.type = 'text/javascript';
-                script.charset = 'utf-8';
-                script.id = 'changyan_mobile_js';
-                script.src = 'https://cy-cdn.kuaizhan.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf;
-                head.appendChild(script);
-            } else {
-                var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://cy-cdn.kuaizhan.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
-            }
-        })();
+        <div id="vcomments"></div>
+        <script>
+            new Valine({
+                el: '#vcomments',
+                appId: 'JTQFKjuUyrL06ubCvOll17tP-gzGzoHsz',
+                appKey: 'lJ24pPuaJhlnt9JRvQICgI4d'
+            })
         </script>
     </div>
 
     <div class="section">
-        <div id="cyReward" role="cylabs" data-use="reward"></div>
-        <script type="text/javascript" charset="utf-8" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cywbKB4y6"></script>
+        <div data-use="reward" id="cyReward" role="cylabs"></div>
+        <script charset="utf-8" src="https://cy-cdn.kuaizhan.com/js/??lib/jquery.js,changyan.labs.https.js?appid=cywbKB4y6"
+                type="text/javascript"></script>
     </div>
 </div>
 {{ template "footer" . }}

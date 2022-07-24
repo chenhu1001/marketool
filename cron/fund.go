@@ -4,22 +4,22 @@ package cron
 import (
 	"context"
 	"encoding/json"
+	"github.com/chenhu1001/marketool/goutils"
 	"io/ioutil"
 	"time"
 
 	"github.com/chenhu1001/marketool/core"
 	"github.com/chenhu1001/marketool/datacenter"
 	"github.com/chenhu1001/marketool/datacenter/eastmoney"
-	"github.com/chenhu1001/marketool/goutils"
 	"github.com/chenhu1001/marketool/logging"
 	"github.com/chenhu1001/marketool/models"
 )
 
 // SyncFund 同步基金数据
 func SyncFund() {
-	if !goutils.IsTradingDay() {
-		return
-	}
+	//if !goutils.IsTradingDay() {
+	//	return
+	//}
 	ctx := context.Background()
 	logging.Infof(ctx, "SyncFund request start...")
 
@@ -83,6 +83,9 @@ func SyncFund() {
 
 	// 更新同步时间
 	models.SyncFundTime = time.Now()
+
+	// 推送爬取结果
+	goutils.Push("SyncFund成功")
 }
 
 // Update4433 更新4433检测结果

@@ -4,19 +4,19 @@ package cron
 import (
 	"context"
 	"encoding/json"
+	"github.com/chenhu1001/marketool/goutils"
 	"io/ioutil"
 
 	"github.com/chenhu1001/marketool/datacenter"
-	"github.com/chenhu1001/marketool/goutils"
 	"github.com/chenhu1001/marketool/logging"
 	"github.com/chenhu1001/marketool/models"
 )
 
 // SyncFundManagers 同步基金经理
 func SyncFundManagers() {
-	if !goutils.IsTradingDay() {
-		return
-	}
+	//if !goutils.IsTradingDay() {
+	//	return
+	//}
 	ctx := context.Background()
 	managers, err := datacenter.EastMoney.FundMangers(ctx, "all", "penavgrowth", "desc")
 	if err != nil {
@@ -39,4 +39,7 @@ func SyncFundManagers() {
 		promSyncError.WithLabelValues("SyncFundManagers").Inc()
 		return
 	}
+
+	// 推送爬取结果
+	goutils.Push("SyncFundManagers成功")
 }

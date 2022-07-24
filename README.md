@@ -10,6 +10,11 @@ A market investment analysis tool
 goreleaser init
 ```
 
+添加tag
+```
+git tag v1.0.0
+```
+
 执行自动发布流程 Mac
 
 ```

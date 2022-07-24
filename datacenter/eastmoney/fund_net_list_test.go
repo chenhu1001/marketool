@@ -8,7 +8,7 @@ import (
 )
 
 func _TestQueryAllFundNetList(t *testing.T) {
-	viper.SetDefault("app.chan_size", 500)
+	viper.SetDefault("app.chan_size", 50)
 	data, err := _em.QueryAllFundList(_ctx, FundTypeALL)
 	require.Nil(t, err)
 	require.NotEmpty(t, data)

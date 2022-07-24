@@ -13,6 +13,8 @@ builds:
       - linux
       - windows
       - darwin
+    flags:
+      - -v
 archives:
   - replacements:
       darwin: Darwin
@@ -23,10 +25,15 @@ archives:
     files:
       - config.toml
       - statics/**/*
+      - marketool.top_bundle.pem
+      - marketool.top.key
+      - marketool.top_bundle.crt
+      - marketool.top.csr
+      - marketool.top_root.crt
 checksum:
   name_template: 'checksums.txt'
 snapshot:
-  name_template: "{{ incpatch .Version }}-next"
+  name_template: "{{ .Tag }}"
 changelog:
   sort: asc
   filters:
