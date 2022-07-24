@@ -25,11 +25,6 @@ archives:
     files:
       - config.toml
       - statics/**/*
-      - marketool.top_bundle.pem
-      - marketool.top.key
-      - marketool.top_bundle.crt
-      - marketool.top.csr
-      - marketool.top_root.crt
 checksum:
   name_template: 'checksums.txt'
 snapshot:
