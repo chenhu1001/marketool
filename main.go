@@ -6,25 +6,17 @@ import (
 	"github.com/chenhu1001/marketool/logging"
 	"github.com/chenhu1001/marketool/routes"
 	"github.com/chenhu1001/marketool/routes/response"
-	"github.com/chenhu1001/marketool/version"
 	"github.com/chenhu1001/marketool/webserver"
 	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	"github.com/unrolled/secure"
-	"github.com/urfave/cli/v2"
 	"os"
 	"path"
 	"strings"
 )
 
 func main() {
-	app := cli.NewApp()
-	app.Name = "Marketool"
-	app.Version = version.Version
-	app.Usage = "A market investment analysis tool"
-	app.Run(os.Args)
-
 	// 初始化配置文件
 	InitWithConfigFile("./config.toml")
 
