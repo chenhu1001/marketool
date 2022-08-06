@@ -18,9 +18,9 @@ env = "prod"
     chan_size = 50
 
     [app.cronexp]
-        sync_fund = "18 11 * * 1-6"
-        sync_fund_managers = "17 11 * * 1-6"
-        sync_industry_list = "16 11 * * 1-6"
+        sync_fund = "0 3,22 * * 1-6"
+        sync_fund_managers = "0 4 * * 1-6"
+        sync_industry_list = "0 5 * * 1-6"
 
 
 ########## server 相关配置
