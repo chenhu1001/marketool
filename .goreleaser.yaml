@@ -10,7 +10,6 @@ before:
 builds:
   - env:
       - CGO_ENABLED=0
-      - VERSION=1.0.0
     goos:
       - linux
       - windows
@@ -30,7 +29,7 @@ archives:
 checksum:
   name_template: 'checksums.txt'
 snapshot:
-  name_template: "{{ .Env.VERSION }}"
+  name_template: "{{ .Version }}"
 changelog:
   sort: asc
   filters:

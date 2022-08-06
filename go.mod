@@ -42,6 +42,7 @@ require (
 require (
 	github.com/go-co-op/gocron v1.15.0
 	github.com/unrolled/secure v1.12.0
+	github.com/urfave/cli/v2 v2.3.0
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
