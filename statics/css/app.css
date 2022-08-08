@@ -12,6 +12,26 @@ main {
   background-color: #ff5d00 !important;
 }
 
+.marketool-lighten-background-color {
+  background-color: #ff8a65 !important;
+}
+
 .marketool-text-color {
   color: #ff5d00 !important;
+}
+
+.tabs .tab a {
+  color: #ff5d00 !important;
+}
+
+.tabs .indicator {
+  background-color: #ff5d00 !important;
+}
+
+blockquote {
+  border-left: 5px solid #ff5d00;
+}
+
+.table-of-contents a.active {
+  border-left: 2px solid #ff5d00;
 }

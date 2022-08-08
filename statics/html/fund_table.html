@@ -3,7 +3,7 @@
     {{ $filterparam := .FilterParam }}
     <!-- Dropdown Structure -->
     <div class="dropdown-structure right">
-        <a class='dropdown-trigger btn-small red lighten-2 left' href='#' data-target='fund-fields-dropdown'><i class="material-icons left">more_vert</i>更多信息</a>
+        <a class='dropdown-trigger btn-small marketool-background-color left' href='#' data-target='fund-fields-dropdown'><i class="material-icons left">more_vert</i>更多信息</a>
         <ul id="fund-fields-dropdown" class='dropdown-content'>
             <li><label><input id="f1" type="checkbox" /><span>成立时间</span></label></li>
             <li><label><input id="f2" type="checkbox" /><span>基金规模</span></label></li>
@@ -247,7 +247,7 @@
                         <a href="https://emwap.eastmoney.com/quote/stock/{{ $s.ExCode }}.{{ $s.Code }}.html" target="_blank">{{ $s.Name }}</a> |
                         {{ $s.HoldRatio }}% |
                         {{ $s.Industry }} |
-                        <span {{ if gt $s.AdjustRatio 0.0 }}class="red lighten-2"{{ else }}class="green lighten-2"{{ end }}>{{ $s.AdjustRatio }}%</span></br>
+                        <span {{ if gt $s.AdjustRatio 0.0 }}class="marketool-background-color"{{ else }}class="green lighten-2"{{ end }}>{{ $s.AdjustRatio }}%</span></br>
                     {{ end }}
                 </td>
                 <td class="hide t21">

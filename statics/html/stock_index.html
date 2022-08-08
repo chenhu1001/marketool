@@ -2,8 +2,8 @@
 <div class="row" id="stock_forms">
     <div class="col s12">
         <ul class="tabs">
-            <li class="tab col s6 marketool-text-color"><a class="active" href="#checker">个股检测</a></li>
-            <li class="tab col s6 marketool-text-color"><a href="#selector">基本面选股</a></li>
+            <li class="tab col s6 marketool-tab-text-color"><a class="active" href="#checker">个股检测</a></li>
+            <li class="tab col s6 marketool-tab-text-color"><a href="#selector">基本面选股</a></li>
         </ul>
     </div>
 
@@ -20,7 +20,7 @@
                 {{ template "checker_form_content" . }}
             </form>
             <div class="row">
-                <a class="btn waves-effect waves-light red lighten-2 col s12" id="checker_submit_btn" >检测</a>
+                <a class="btn waves-effect waves-light marketool-background-color col s12" id="checker_submit_btn" >检测</a>
             </div>
         </div>
     </div>
@@ -254,7 +254,7 @@
                 </div>
 
                 <div class="row">
-                    <a class="btn waves-effect waves-light red lighten-2 col s12" id="selector_submit_btn" >筛选</a>
+                    <a class="btn waves-effect waves-light marketool-background-color col s12" id="selector_submit_btn" >筛选</a>
                 </div>
             </form>
         </div>
@@ -269,7 +269,7 @@
     <p class="tiny center">以下所有数据与信息仅供参考，不构成投资建议</p>
     <!-- Dropdown Structure -->
     <div class="dropdown-structure right">
-        <a class='dropdown-trigger btn-small red lighten-2 left' href='#' data-target='fields-dropdown'><i class="material-icons left">more_vert</i>更多信息</a>
+        <a class='dropdown-trigger btn-small marketool-background-color left' href='#' data-target='fields-dropdown'><i class="material-icons left">more_vert</i>更多信息</a>
         <ul id="fields-dropdown" class='dropdown-content'>
             <li><label><input id="sf_1" type="checkbox" /><span>所属行业</span></label></li>
             <li><label><input id="sf_2" type="checkbox" /><span>题材关键词</span></label></li>
@@ -396,7 +396,7 @@
             </tbody>
         </table>
         <div class="row center-align">
-            <a class="export-result-btn waves-effect waves-light btn-large red lighten-2"><i class="material-icons left">import_export</i>导出CSV详情文件</a>
+            <a class="export-result-btn waves-effect waves-light btn-large marketool-background-color"><i class="material-icons left">import_export</i>导出CSV详情文件</a>
         </div>
     </div>
 </div>

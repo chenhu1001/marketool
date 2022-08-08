@@ -2,12 +2,17 @@
 
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
 // Routes 注册 API URL 路由
 func Routes(app *gin.Engine) {
 	//app.GET("/", Index)
 	app.GET("/", StockIndex)
+	app.GET("/sync/fund", SyncFund)
+	app.GET("/sync/industry_list", SyncIndustryList)
+	app.GET("/sync/fund_managers", SyncFundManagers)
 	app.POST("/selector", StockSelector)
 	app.POST("/checker", StockChecker)
 	app.GET("/fund", FundIndex)
