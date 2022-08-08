@@ -9,7 +9,7 @@
 ########## 部署环境标志
 # 该值关联影响其他配置，如数据库， redis 等涉及不同环境的配置
 # 如 配置为 localhost ， 使用 goutils 获取 mysql 相关实例时将使用 [mysql.localhost] 的配置
-env = "prod"
+env = "localhost"
 
 
 ########## 业务相关配置
@@ -18,15 +18,15 @@ env = "prod"
     chan_size = 50
 
     [app.cronexp]
-        sync_fund = "0 3,22 * * 1-6"
-        sync_fund_managers = "0 4 * * 1-6"
-        sync_industry_list = "0 5 * * 1-6"
+        sync_fund = "0 5,22 * * 1-6"
+        sync_fund_managers = "0 4,21 * * 1-6"
+        sync_industry_list = "0 3,20 * * 1-6"
 
 
 ########## server 相关配置
 [server]
     # server 运行地址，支持 HTTP 端口 ":port" 或 UNIX Socket "unix:/file"
-    addr = ":4869"
+    addr = ":80"
     # gin mode ，可选值： debug 、 test 、 release
     mode = "debug"
     # 开启 pprof
@@ -62,7 +62,7 @@ env = "prod"
 ########## 日志相关配置
 [logging]
     # 日志级别，可选值： debug info warn error dpanic panic fatal
-    level = "info"
+    level = "debug"
     # 日志格式，可选值： json console
     format = "json"
     # 日志输出路径： stdout, stderr, logrotate:///path/to/logfile
