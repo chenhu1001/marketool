@@ -42,5 +42,5 @@ func SyncIndustryList() {
 	}
 
 	// 推送爬取结果
-	goutils.Push("SyncIndustryList成功")
+	goutils.Push("同步行业成功")
 }

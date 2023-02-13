@@ -85,7 +85,7 @@ func SyncFund() {
 	models.SyncFundTime = time.Now()
 
 	// 推送爬取结果
-	goutils.Push("SyncFund成功")
+	goutils.Push("同步基金成功")
 }
 
 // Update4433 更新4433检测结果

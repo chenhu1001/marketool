@@ -41,5 +41,5 @@ func SyncFundManagers() {
 	}
 
 	// 推送爬取结果
-	goutils.Push("SyncFundManagers成功")
+	goutils.Push("同步基金经理成功")
 }
