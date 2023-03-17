@@ -32,6 +32,8 @@ Windows
 
 ```
 goreleaser.exe --snapshot --skip-publish --rm-dist
+或
+.\goreleaser.exe --snapshot --skip-publish --rm-dist
 ```
 
 # 使用Go.mod官方包管理工具
