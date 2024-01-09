@@ -34,7 +34,7 @@ func main() {
 
 	if viper.GetString("server.protocol") == "https" {
 		server.Use(TlsHandler())
-		server.RunTLS(viper.GetString("server.addr"), "marketool.top_bundle.pem", "marketool.top.key")
+		server.RunTLS(viper.GetString("server.addr"), "marketool.clang.asia_bundle.pem", "marketool.clang.asia.key")
 	} else {
 		// 运行服务
 		webserver.Run(server)
@@ -45,7 +45,7 @@ func TlsHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		secureMiddleware := secure.New(secure.Options{
 			SSLRedirect: true,
-			SSLHost:     "www.marketool.top",
+			SSLHost:     "marketool.clang.asia",
 		})
 		err := secureMiddleware.Process(c.Writer, c.Request)
 

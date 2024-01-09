@@ -36,9 +36,9 @@ env = "localhost"
     # 请求协议：http、https
     protocol = "http"
     # certFile
-    certFile = "marketool.top_bundle.pem"
+    certFile = "marketool.clang.asia_bundle.pem"
     # keyFile
-    keyFile = "marketool.top.key"
+    keyFile = "marketool.clang.asia.key"
 
 
 ########## 静态文件相关配置
