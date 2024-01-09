@@ -31,8 +31,6 @@ Linux
 Windows
 
 ```
-goreleaser.exe --snapshot --skip-publish --rm-dist
-或
 .\goreleaser.exe --snapshot --skip-publish --rm-dist
 ```
 
